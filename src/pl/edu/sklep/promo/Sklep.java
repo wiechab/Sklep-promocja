@@ -32,17 +32,18 @@ public class Sklep extends SklepPromo {
 		case FASOLA:
 			cenaTow = Towary.FASOLA.getCena();
 			break;
-
 		case OGOREK:
 			cenaTow = Towary.OGOREK.getCena();
+			break;
+		case MARCHEWKA:
+			cenaTow = Towary.MARCHEWKA.getCena();
 			break;
 		default:
 			break;
 		}
 		
-		//cenaTow.multiply(BigDecimal.valueOf(this.prom));
+		//cenaTow.multiply(BigDecimal.valueOf(0.55));
 		cenaTow.multiply(this.prom);
-		//cenaTow.multiply(BigDecimal.valueOf(0.56));
 		return cenaTow;
 	}
 
