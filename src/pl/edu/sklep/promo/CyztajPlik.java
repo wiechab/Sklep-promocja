@@ -52,10 +52,13 @@ public class CyztajPlik {
 			System.out.println(liczniki.keySet()); //zwraca klucze mapy
 			
 			String maxk = "";
-			Integer maxv = 0;
+			int maxv = 0;
 			
 			String mink = "";
-			Integer minv = 1;
+			int minv = 1;
+			
+			int licznikMin = 0;
+			int licznikMax = 0;
 			
 			for (Map.Entry<String, Integer> ll : liczniki.entrySet()) {
 				String k = ll.getKey();
@@ -63,27 +66,33 @@ public class CyztajPlik {
 				if(v >= maxv) {
 				
 					if(maxv == v) {
-						maxk = maxk + ", " + k;
+						maxk = maxk + "; " + k;
+						licznikMax ++;
 					} else {
+					licznikMax = 1;	
 					maxk = k;
 				
 				}	
 					maxv = v;
+				}
 				
 				if(v <= minv) {
 					if(minv == v) {
-						mink = mink + ", " + k;
+						mink = mink + "; " + k;
+						licznikMin ++;
 					} else {
+						licznikMin = 1;
 						mink = k;
+					
 					}
 						
 					minv = v;
 					
 				}
 			}
-		}
-			System.out.println("max " + maxk + " wyst¹pieñ " + maxv);
-			System.out.println("min " + mink + " wyst¹pieñ " + minv);
+	
+			System.out.println("max " + maxk + " wyst¹pieñ " + maxv + " licznik s³ów " + licznikMax);
+			System.out.println("min " + mink + " wyst¹pieñ " + minv + " licznik s³ów " + licznikMin);
 			
 		} catch (FileNotFoundException e) {
 			logger.throwing("AWczytajPlik", "wczytajPlik", e);
@@ -91,7 +100,7 @@ public class CyztajPlik {
 	}
 	private static void przetwarzajLinie(String wiersz) {
 			List<String> s³owa = Arrays.asList(wiersz.split(" "));
-			String[] names = new String[s³owa.size()];
+			String[] words = new String[s³owa.size()];
 			/*
 		Collection<String> listUn = Collections.unmodifiableCollection(lista);
 		
@@ -103,12 +112,12 @@ public class CyztajPlik {
 			int i = 0;
 			for ( String s : s³owa) {
 				//System.out.println("s=");
-				names[i] = s.replace("Java", "avaJ");
+				words[i] = s.replace("Java", "avaJ");
 				
 				//names[i] = s.replace(".", "");
 				//names[i] = s.replace(",", "");
-				System.out.println(names[i]);
-				liczniki.merge(names[i].toUpperCase(), 1, Integer::sum);
+				//System.out.println(names[i]);
+				liczniki.merge(words[i].toUpperCase(), 1, Integer::sum);
 				i++;
 
 				}
